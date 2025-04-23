@@ -1,0 +1,1 @@
+// IDepartmentRepository.cs content placeholder
