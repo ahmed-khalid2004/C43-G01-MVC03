@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
-using AspNetMVCProject.Data;
 using AspNetMVCProject.Models;
+using MVC03.Data.Contexts;
 
 namespace AspNetMVCProject.Services
 {
     public class DepartmentService : IDepartmentService
     {
-        private readonly AppDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public DepartmentService(AppDbContext context)
+        public DepartmentService(ApplicationDbContext context)
         {
             _context = context;
         }

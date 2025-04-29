@@ -1,4 +1,3 @@
-using AspNetMVCProject.Data;
 using AspNetMVCProject.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MVC03.Data.Contexts;
 
 namespace AspNetMVCProject
 {
@@ -23,7 +23,7 @@ namespace AspNetMVCProject
             services.AddControllersWithViews();
 
             // Register DbContext with SQL Server connection
-            services.AddDbContext<AppDbContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             // Register Department Service

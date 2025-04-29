@@ -1,6 +1,6 @@
-using AspNetMVCProject.Data;
 using AspNetMVCProject.Services;
 using Microsoft.EntityFrameworkCore;
+using MVC03.Data.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // Register DbContext with SQL Server
-builder.Services.AddDbContext<AppDbContext>(options =>
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Register custom services
