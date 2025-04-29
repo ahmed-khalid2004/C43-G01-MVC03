@@ -1,24 +1,29 @@
 using Microsoft.EntityFrameworkCore;
-using AspNetMVCProject.Models;
 using System.Reflection;
-using MVC03.Data.Confingurations;
+using Demo.DataAccess.Data.Configurations;
+using Demo.DataAccess.Models;
 
-namespace MVC03.Data.Contexts
+namespace Demo.DataAccess.Data.Contexts
 {
-    class ApplicationDbContext : DbContext
+    public class ApplicationDKContext : DbContext
+    {
+        public DbSet<Department> Departments { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            public DbSet<Department> Departments { get; set; }
-
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+            if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("ConnectionString");
-            }
-
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-            {
-                modelBuilder.ApplyConfiguration<Department>(new DepartmentConfigurations());
-                modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-                modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+                optionsBuilder.UseSqlServer("DefaultConnection");
             }
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Either apply individual configuration
+            // modelBuilder.ApplyConfiguration(new DepartmentConfiguration());
+
+            // Or apply all configurations from assembly
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        }
     }
+}
