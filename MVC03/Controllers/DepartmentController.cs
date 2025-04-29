@@ -1,55 +1,14 @@
+using MVC03.Services;
 using Microsoft.AspNetCore.Mvc;
-using AspNetMVCProject.Services;
-using AspNetMVCProject.Models;
 
-namespace AspNetMVCProject.Controllers
+namespace MVC03.Controllers
 {
-    public class DepartmentController : Controller
+    public class DepartmentController(IDepartmentService departmentServices) : Controller
     {
-        private readonly IDepartmentService _service;
-
-        public DepartmentController(IDepartmentService service)
+        public IActionResult Index()
         {
-            _service = service;
-        }
-
-        public IActionResult Index() => View(_service.GetAll());
-
-        public IActionResult Details(int id) => View(_service.GetById(id));
-
-        public IActionResult Create() => View();
-
-        [HttpPost]
-        public IActionResult Create(Department department)
-        {
-            if (ModelState.IsValid)
-            {
-                _service.Add(department);
-                return RedirectToAction("Index");
-            }
-            return View(department);
-        }
-
-        public IActionResult Edit(int id) => View(_service.GetById(id));
-
-        [HttpPost]
-        public IActionResult Edit(Department department)
-        {
-            if (ModelState.IsValid)
-            {
-                _service.Update(department);
-                return RedirectToAction("Index");
-            }
-            return View(department);
-        }
-
-        public IActionResult Delete(int id) => View(_service.GetById(id));
-
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteConfirmed(int id)
-        {
-            _service.Delete(id);
-            return RedirectToAction("Index");
+            var Departments = departmentServices.GetAllDepartments();
+            return View();
         }
     }
 }

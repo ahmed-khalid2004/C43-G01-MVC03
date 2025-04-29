@@ -1,14 +1,14 @@
+using MVC03.Models;
 using System.Collections.Generic;
-using AspNetMVCProject.Models;
 
-namespace AspNetMVCProject.Services
+namespace MVC03.Services
 {
     public interface IDepartmentService
     {
-        IEnumerable<Department> GetAll();
-        Department GetById(int id);
-        void Add(Department department);
-        void Update(Department department);
-        void Delete(int id);
+        IEnumerable<Department> GetAllDepartments();
+        Department? GetDepartmentById(int id);
+        int CreateDepartment(Department department);
+        int UpdateDepartment(Department department);
+        int DeleteDepartment(int id);
     }
 }

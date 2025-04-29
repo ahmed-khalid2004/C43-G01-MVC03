@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AspNetMVCProject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-namespace MVC03.Data.Confingurations
+using MVC03.Models;
+namespace MVC03.Data.Configurations
 {
     public class DepartmentConfigurations : IEntityTypeConfiguration<Department>
     {

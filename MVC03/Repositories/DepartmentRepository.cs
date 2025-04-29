@@ -1,57 +1,46 @@
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using AspNetMVCProject.Models;
 using MVC03.Data.Contexts;
+using MVC03.Models;
 
-namespace MVC03.Data.Repositories
+namespace MVC03.Repositories
 {
     public class DepartmentRepository : IDepartmentRepository
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly ApplicationDbContext _context;
 
-        public DepartmentRepository(ApplicationDbContext dbContext)
+        public DepartmentRepository(ApplicationDbContext context)
         {
-            _dbContext = dbContext;
+            _context = context;
         }
 
-        // Get all departments with optional tracking
         public IEnumerable<Department> GetAll(bool withTracking = false)
         {
-            var query = _dbContext.Departments.AsQueryable();
-
-            if (!withTracking)
-            {
-                query = query.AsNoTracking();
-            }
-
-            return query.ToList();
+            return withTracking
+                ? _context.Departments.ToList()
+                : _context.Departments.AsNoTracking().ToList();
         }
 
-        // Get department by ID
         public Department? GetById(int id)
         {
-            return _dbContext.Departments.Find(id);
+            return _context.Departments.Find(id);
         }
 
-        // Update department
-        public int Update(Department department)
-        {
-            _dbContext.Departments.Update(department);
-            return _dbContext.SaveChanges();
-        }
-
-        // Delete department
-        public int Remove(Department department)
-        {
-            _dbContext.Departments.Remove(department);
-            return _dbContext.SaveChanges();
-        }
-
-        // Add new department
         public int Add(Department department)
         {
-            _dbContext.Departments.Add(department);
-            return _dbContext.SaveChanges();
+            _context.Departments.Add(department);
+            return _context.SaveChanges();
+        }
+
+        public int Update(Department department)
+        {
+            _context.Departments.Update(department);
+            return _context.SaveChanges();
+        }
+
+        public int Remove(Department department)
+        {
+            _context.Departments.Remove(department);
+            return _context.SaveChanges();
         }
     }
 }

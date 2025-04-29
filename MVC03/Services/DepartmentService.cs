@@ -1,22 +1,43 @@
-using AspNetMVCProject.Models;
-using MVC03.Data.Repositories;
+using MVC03.Models;
+using MVC03.Repositories;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace MVC03.Services
 {
-    class DepartmentService
+    public class DepartmentService : IDepartmentService
     {
-        private readonly IDepartmentRepository departmentRepository;
+        private readonly IDepartmentRepository _repository;
 
-        public DepartmentService(DepartmentRepository departmentRepository)
+        public DepartmentService(IDepartmentRepository repository)
         {
-            this.departmentRepository = departmentRepository;
+            _repository = repository;
         }
 
-        public int Test()
+        public IEnumerable<Department> GetAllDepartments()
         {
-            List<Department> departments = departmentRepository.GetAll().ToList();
+            return _repository.GetAll(withTracking: false);
+        }
+
+        public Department? GetDepartmentById(int id)
+        {
+            return _repository.GetById(id);
+        }
+
+        public int CreateDepartment(Department department)
+        {
+            return _repository.Add(department);
+        }
+
+        public int UpdateDepartment(Department department)
+        {
+            return _repository.Update(department);
+        }
+
+        public int DeleteDepartment(int id)
+        {
+            var department = _repository.GetById(id);
+            if (department == null) return 0;
+            return _repository.Remove(department);
         }
     }
 }
