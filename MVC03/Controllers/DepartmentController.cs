@@ -3,12 +3,21 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MVC03.Controllers
 {
-    public class DepartmentController(IDepartmentService departmentServices) : Controller
+    public class DepartmentsController : Controller
     {
+        private readonly IDepartmentService _departmentService;
+
+        public DepartmentsController(IDepartmentService departmentService)
+        {
+            _departmentService = departmentService;
+        }
+
+        // GET BaseUrl/Departments/Index
+        [HttpGet]
         public IActionResult Index()
         {
-            var Departments = departmentServices.GetAllDepartments();
-            return View();
+            var departments = _departmentService.GetAllDepartments();
+            return View( departments);
         }
     }
 }
