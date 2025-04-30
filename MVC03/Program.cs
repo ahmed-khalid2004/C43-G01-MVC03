@@ -15,5 +15,3 @@ builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
-
-// Rest of the Program.cs configuration...

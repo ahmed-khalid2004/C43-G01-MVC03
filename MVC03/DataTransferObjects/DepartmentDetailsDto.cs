@@ -1,4 +1,4 @@
-﻿using AspNetMVCProject.Models;
+﻿using MVC03.Models;
 
 namespace MVC03.DataTransferObjects
 {
@@ -13,7 +13,7 @@ namespace MVC03.DataTransferObjects
         {
             Id = department.Id;
             Name = department.Name;
-            CreatedOn = DateOnly.FromDateTime(department.CreatedOn);
+            CreatedOn = DateOnly.FromDateTime(department.CreateOn);
         }
     }
 }
