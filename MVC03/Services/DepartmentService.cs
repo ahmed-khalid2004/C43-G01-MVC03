@@ -1,50 +1,43 @@
+using MVC03.Models;
+using MVC03.Repositories;
 using System.Collections.Generic;
-using System.Linq;
-using AspNetMVCProject.Data;
-using AspNetMVCProject.Models;
 
-namespace AspNetMVCProject.Services
+namespace MVC03.Services
 {
     public class DepartmentService : IDepartmentService
     {
-        private readonly AppDbContext _context;
+        private readonly IDepartmentRepository _repository;
 
-        public DepartmentService(AppDbContext context)
+        public DepartmentService(IDepartmentRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        public IEnumerable<Department> GetAll()
+        public IEnumerable<Department> GetAllDepartments()
         {
-            return _context.Departments.Where(d => !d.IsDeleted).ToList();
+            return _repository.GetAll(withTracking: false);
         }
 
-        public Department GetById(int id)
+        public Department? GetDepartmentById(int id)
         {
-            return _context.Departments.Find(id);
+            return _repository.GetById(id);
         }
 
-        public void Add(Department department)
+        public int CreateDepartment(Department department)
         {
-            department.CreatedOn = DateTime.Now;
-            _context.Departments.Add(department);
-            _context.SaveChanges();
+            return _repository.Add(department);
         }
 
-        public void Update(Department department)
+        public int UpdateDepartment(Department department)
         {
-            _context.Departments.Update(department);
-            _context.SaveChanges();
+            return _repository.Update(department);
         }
 
-        public void Delete(int id)
+        public int DeleteDepartment(int id)
         {
-            var dept = _context.Departments.Find(id);
-            if (dept != null)
-            {
-                dept.IsDeleted = true;
-                _context.SaveChanges();
-            }
+            var department = _repository.GetById(id);
+            if (department == null) return 0;
+            return _repository.Remove(department);
         }
     }
 }
