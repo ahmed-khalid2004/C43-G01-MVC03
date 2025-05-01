@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-namespace BusinessLogic.DataTransferObjects.DepartmentDtos
+namespace MVC03.BusinessLogic.DataTransferObjects.DepartmentDtos
 {
     public class DepartmentDto
     {

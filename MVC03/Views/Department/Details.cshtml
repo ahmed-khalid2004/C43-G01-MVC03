@@ -1,3 +1,7 @@
+﻿@model DepartmentDetailsDto
+@{
+    ViewData["Title"] = "Details";
+}
 
 <h1 class="my-5 w-75">Department Details</h1>
 
@@ -29,8 +33,8 @@
                 <input asp-for="Description" class="form-control" readonly />
             </div>
             <div class="form-group col-12">
-                <label class="col-form-label" asp-for="DateOfCreation"></label>
-                <input asp-for="DateOfCreation" class="form-control" readonly />
+                <label class="col-form-label" asp-for="CreatedOn"></label>
+                <input asp-for="CreatedOn" class="form-control" readonly />
             </div>
 
         </div>
@@ -44,7 +48,7 @@
         </div>
         <div class="form-group  col-12">
             <label class="col-form-label">CreatedOn</label>
-            <input asp-for="DateOfCreation" class="form-control" readonly />
+            <input asp-for="CreatedOn" class="form-control" readonly />
         </div>
         <div class="form-group  col-12">
             <label class="col-form-label" asp-for="LastModifiedBy"></label>

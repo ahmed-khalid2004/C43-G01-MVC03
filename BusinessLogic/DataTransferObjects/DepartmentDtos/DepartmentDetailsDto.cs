@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MVC03.DataAccess.Models;
-namespace BusinessLogic.DataTransferObjects.DepartmentDtos
+namespace MVC03.BusinessLogic.DataTransferObjects.DepartmentDtos
 {
     public class DepartmentDetailsDto
     {
