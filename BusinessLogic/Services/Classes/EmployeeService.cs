@@ -1,26 +1,18 @@
-﻿using MVC03.BusinessLogic.DataTransferObjects.EmployeeDtos;
+﻿using AutoMapper;
+using MVC03.BusinessLogic.DataTransferObjects.EmployeeDtos;
 using MVC03.BusinessLogic.Services.Interfaces;
+using MVC03.DataAccess.Models.EmployeeModel;
 using MVC03.DataAccess.Repositories.Interfaces;
 
 namespace MVC03.BusinessLogic.Services.Classes
 {
-    public class EmployeeService(IEmployeeRepository _employeeRepository) : IEmployeeService
+    public class EmployeeService(IEmployeeRepository _employeeRepository, IMapper _mapper) : IEmployeeService
     {
         public IEnumerable<EmployeeDto> GetAllEmployees(bool withTracking = false)
         {
             var employees = _employeeRepository.GetAll(withTracking);
 
-            var employeesDto = employees.Select(emp => new EmployeeDto
-            {
-                Id = emp.Id,
-                Name = emp.Name,
-                Age = emp.Age,
-                Email = emp.Email,
-                IsActive = emp.IsActive,
-                Salary = emp.Salary,
-                EmployeeType = emp.EmployeeType.ToString(),
-                Gender = emp.Gender.ToString()
-            });
+            var employeesDto = _mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeDto>>(employees);
 
             return employeesDto;
         }
@@ -28,28 +20,17 @@ namespace MVC03.BusinessLogic.Services.Classes
         {
             var employee = _employeeRepository.GetById(id);
 
-            return employee is null ? null : new EmployeeDetailsDto()
-            {
-                Id = employee.Id,
-                Name = employee.Name,
-                Salary = employee.Salary,
-                Address = employee.Address,
-                Age = employee.Age,
-                Email = employee.Email,
-                HiringDate = DateOnly.FromDateTime(employee.HiringDate),
-                IsActive = employee.IsActive,
-                PhoneNumber = employee.PhoneNumber,
-                EmployeeType = employee.EmployeeType.ToString(),
-                Gender = employee.Gender.ToString(),
-                CreatedBy = 1,
-                CreatedOn = (DateTime)employee.CreatedOn,
-                LastModifiedBy = 1,
-                LastModifiedOn = (DateTime)employee.LastModifiedOn
-            };
+            return employee is null ? null : _mapper.Map<EmployeeDetailsDto>(employee);
         }
         public int CreateEmployee(CreatedEmployeeDto employeeDto)
         {
-            throw new NotImplementedException();
+            var employee = _mapper.Map<CreatedEmployeeDto, Employee>(employeeDto);
+            return _employeeRepository.Add(employee);
+        }
+
+        public int UpdateEmployee(UpdatedEmployeeDto employeeDto)
+        {
+            return _employeeRepository.Update(_mapper.Map<UpdatedEmployeeDto, Employee>(employeeDto));
         }
 
         public bool DeleteEmployee(int id)
@@ -57,9 +38,6 @@ namespace MVC03.BusinessLogic.Services.Classes
             throw new NotImplementedException();
         }
 
-        public int UpdateEmployee(UpdatedEmployeeDto employeeDto)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }
