@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using MVC03.BusinessLogic.DataTransferObjects.DepartmentDtos;
+
 
 namespace MVC03.BusinessLogic.DataTransferObjects.DepartmentDtos
 {

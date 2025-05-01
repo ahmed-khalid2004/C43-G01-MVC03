@@ -22,7 +22,6 @@ namespace MVC03
             var builder = WebApplication.CreateBuilder(args);
 
             #region Add Service to Container
-
             builder.Services.AddControllersWithViews(Options =>
             {
                 Options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
