@@ -47,7 +47,6 @@ namespace MVC03.Controllers
         #endregion
 
         #region Details of Employee
-
         [HttpGet]
         public IActionResult Details(int? id)
         {
@@ -56,7 +55,6 @@ namespace MVC03.Controllers
             var employee = _employeeService.GetEmployeeById(id.Value);
             return employee is null ? NotFound() : View(employee);
         }
-
         #endregion
 
         #region Edit Employee
