@@ -3,6 +3,8 @@ using Microsoft.Extensions.Options;
 using MVC03.BusinessLogic.Services;
 using MVC03.DataAccess.Data.Contexts;
 using MVC03.DataAccess.Repositories;
+using MVC03.DataAccess.Repositories.Classes;
+using MVC03.DataAccess.Repositories.Interfaces;
 namespace MVC03.Presentation
 {
     public class Program
