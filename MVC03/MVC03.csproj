@@ -35,4 +35,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
+    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj" />
+  </ItemGroup>
+
 </Project>

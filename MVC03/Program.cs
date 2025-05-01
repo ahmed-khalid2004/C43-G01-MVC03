@@ -1,17 +1,51 @@
 using Microsoft.EntityFrameworkCore;
-using MVC03.Data.Contexts;
-using MVC03.Repositories;
-using MVC03.Services;
+using Microsoft.Extensions.Options;
+using MVC03.BusinessLogic.Services;
+using MVC03.DataAccess.Data.Contexts;
+using MVC03.DataAccess.Repositories;
+namespace MVC03.Presentation
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
 
-var builder = WebApplication.CreateBuilder(args);
+            var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+            #region Add Service to Container
+            builder.Services.AddControllersWithViews();
+            //builder.Services.AddScoped<ApplicationDbContext>();
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]);
+            });
 
-builder.Services.AddControllersWithViews();
+            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 
-var app = builder.Build();
+            #endregion
+
+            var app = builder.Build();
+
+            #region Configure the HTTP request pipeline
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
+            }
+
+            app.UseHttpsRedirection();
+            app.UseRouting();
+            app.UseStaticFiles();
+
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            #endregion
+
+
+            app.Run();
+        }
+    }
+}
