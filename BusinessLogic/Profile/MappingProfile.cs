@@ -6,7 +6,7 @@ using MVC03.DataAccess.Models.EmployeeModel;
 
 namespace MVC03.BusinessLogic.Profile
 {
-    public class MappingProfile : Profile
+    public class MappingProfile : AutoMapper.Profile
     {
         public MappingProfile()
         {

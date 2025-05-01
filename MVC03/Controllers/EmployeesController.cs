@@ -21,7 +21,8 @@ namespace MVC03.Controllers
         public IActionResult Create() => View();
 
         [HttpPost]
-        public IActionResult Create(CreatedEmployeeDto employeeDto) {
+        public IActionResult Create(CreatedEmployeeDto employeeDto)
+        {
             if (ModelState.IsValid) // Server Side Validation
             {
                 try
@@ -162,7 +163,7 @@ namespace MVC03.Controllers
                     return View("Error", ex);
                 }
             }
-        } 
+        }
         #endregion
 
     }
