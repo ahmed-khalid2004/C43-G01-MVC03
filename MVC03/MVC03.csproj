@@ -7,24 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Department\Create.cshtml" />
-    <Content Remove="Views\Department\Delete Modal.cshtml" />
-    <Content Remove="Views\Department\Delete.cshtml" />
-    <Content Remove="Views\Department\Details.cshtml" />
-    <Content Remove="Views\Department\Edit.cshtml" />
-    <Content Remove="Views\Department\Index.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Views\Department\Create.cshtml" />
-    <None Include="Views\Department\Delete Modal.cshtml" />
-    <None Include="Views\Department\Delete.cshtml" />
-    <None Include="Views\Department\Details.cshtml" />
-    <None Include="Views\Department\Edit.cshtml" />
-    <None Include="Views\Department\Index.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.3.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
