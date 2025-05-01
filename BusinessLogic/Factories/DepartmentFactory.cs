@@ -1,6 +1,7 @@
 ﻿using System;
 using MVC03.BusinessLogic.DataTransferObjects;
 using MVC03.DataAccess.Models;
+using MVC03.DataAccess.Models.DepartmentModel;
 
 namespace MVC03.BusinessLogic.Factories
 {

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MVC03.DataAccess.Data.Contexts;
+using MVC03.DataAccess.Models.DepartmentModel;
+using EntityDepartment = MVC03.DataAccess.Models.DepartmentModel.Department;
 
 namespace MVC03.DataAccess.Repositories
 {
@@ -12,26 +14,26 @@ namespace MVC03.DataAccess.Repositories
         private readonly ApplicationDbContext _dbContext = dbContext;
         //public DepartmentRepository (ApplicationDbContext dbContext) { this._dbContext = dbContext;}
 
-        public IEnumerable<Department> GetAll(bool WithTracking = false)
+        public IEnumerable<EntityDepartment> GetAll(bool WithTracking = false)
         {
             if (WithTracking) return _dbContext.Departments.ToList();
             else return _dbContext.Departments.AsNoTracking().ToList();
         }
-        public Department? GetById(int id) => _dbContext.Departments.Find(id);
+        public EntityDepartment? GetById(int id) => _dbContext.Departments.Find(id);
 
-        public int Update(Department department)
+        public int Update(EntityDepartment department)
         {
             _dbContext.Departments.Update(department);
             return _dbContext.SaveChanges();
         }
 
-        public int Remove(Department department)
+        public int Remove(EntityDepartment department)
         {
             _dbContext.Departments.Remove(department);
             return _dbContext.SaveChanges();
         }
 
-        public int Add(Department department)
+        public int Add(EntityDepartment department)
         {
             _dbContext.Departments.Add(department);
             return _dbContext.SaveChanges();
