@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MVC03.DataAccess.Models;   
-
+using MVC03.DataAccess.Models;
 
 namespace MVC03.DataAccess.Models
 {
