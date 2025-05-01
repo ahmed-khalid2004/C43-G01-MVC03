@@ -1,5 +1,5 @@
 ﻿using System;
-using MVC03.BusinessLogic.DataTransferObjects;
+using BusinessLogic.DataTransferObjects.DepartmentDtos;
 using MVC03.DataAccess.Models;
 using MVC03.DataAccess.Models.DepartmentModel;
 

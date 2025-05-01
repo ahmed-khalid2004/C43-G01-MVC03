@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using MVC_Project.DataAccess.Repositories.Classes;
 using MVC03.BusinessLogic.Services;
+using MVC03.BusinessLogic.Services.Classes;
+using MVC03.BusinessLogic.Services.Interfaces;
 using MVC03.DataAccess.Data.Contexts;
 using MVC03.DataAccess.Repositories;
 using MVC03.DataAccess.Repositories.Classes;
@@ -24,7 +27,7 @@ namespace MVC03.Presentation
 
             builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             builder.Services.AddScoped<IDepartmentService, DepartmentService>();
-
+            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             #endregion
 
             var app = builder.Build();

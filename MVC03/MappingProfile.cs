@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using MVC03.BusinessLogic.DataTransferObjects;
+using BusinessLogic.DataTransferObjects.DepartmentDtos;
 using MVC03.DataAccess.Models.DepartmentModel;
 
 public class MappingProfile : Profile

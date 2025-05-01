@@ -1,11 +1,11 @@
-﻿using MVC03.BusinessLogic.DataTransferObjects;
-using System.Collections.Generic;
+﻿using BusinessLogic.DataTransferObjects.DepartmentDtos;
 
-namespace MVC03.BusinessLogic.Services
+namespace MVC03.BusinessLogic.Services.Interfaces
 {
     public interface IDepartmentService
     {
         int AddDepartment(CreatedDepartmentDto departmentDto);
+        int CreateDepartment(CreatedDepartmentDto departmentDto);
         bool DeleteDepartment(int id);
         IEnumerable<DepartmentDto> GetAllDepartments();
         DepartmentDetailsDto? GetDepartmentById(int id);

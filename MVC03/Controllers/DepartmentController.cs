@@ -1,6 +1,8 @@
+using BusinessLogic.DataTransferObjects.DepartmentDtos;
 using Microsoft.AspNetCore.Mvc;
 using MVC03.BusinessLogic.DataTransferObjects;
 using MVC03.BusinessLogic.Services;
+using MVC03.BusinessLogic.Services.Interfaces;
 using MVC03.ViewModels.DepartmentViewModel;
 
 namespace MVC03.Controllers
