@@ -41,7 +41,5 @@ namespace MVC03.DataAccess.Repositories.Classes
         {
             _dbContext.Set<TEntity>().Remove(entity);
         }
-
-
     }
 }

@@ -12,6 +12,7 @@ using MVC03.DataAccess.Repositories.Classes;
 using Microsoft.AspNetCore.Mvc;
 using MVC03.DataAccess.Repositories.Classes;
 using MVC03.BusinessLogic.Profile;
+using MVC_Project.DataAccess.Repositories.Classes;
 namespace MVC03
 {
     public class Program
@@ -38,6 +39,7 @@ namespace MVC03
             builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddAutoMapper(M => M.AddProfile(new MappingProfile()));
             #endregion
 
