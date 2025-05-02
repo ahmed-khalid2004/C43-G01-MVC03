@@ -12,9 +12,9 @@ namespace MVC03.Controllers
          ILogger<EmployeesController> logger,
          IDepartmentService departmentService) : Controller        
     {
-        public IActionResult Index()
+        public IActionResult Index(string? EmployeeSearchName)
         {
-            var Employees = _employeeService.GetAllEmployees();
+            var Employees = _employeeService.GetAllEmployees(EmployeeSearchName);
             return View(Employees);
         }
 

@@ -8,9 +8,15 @@ namespace MVC03.BusinessLogic.Services.Classes
 {
     public class EmployeeService(IEmployeeRepository _employeeRepository, IMapper _mapper) : IEmployeeService
     {
-        public IEnumerable<EmployeeDto> GetAllEmployees(bool withTracking = false)
+        public IEnumerable<EmployeeDto> GetAllEmployees(string? EmployeeSearchName)
         {
-            var employees = _employeeRepository.GetAll(withTracking);
+            //var employees = _employeeRepository.GetAll(E => E.Name.ToLower().Contains(EmployeeSearchName.ToLower()));
+
+            IEnumerable<Employee> employees;
+            if (string.IsNullOrEmpty(EmployeeSearchName))
+                employees = _employeeRepository.GetAll();
+            else
+                employees = _employeeRepository.GetAll(E => E.Name.ToLower().Contains(EmployeeSearchName.ToLower()));
 
             var employeesDto = _mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeDto>>(employees);
 
@@ -19,7 +25,6 @@ namespace MVC03.BusinessLogic.Services.Classes
         public EmployeeDetailsDto? GetEmployeeById(int id)
         {
             var employee = _employeeRepository.GetById(id);
-
             return employee is null ? null : _mapper.Map<EmployeeDetailsDto>(employee);
         }
         public int CreateEmployee(CreatedEmployeeDto employeeDto)
@@ -32,12 +37,9 @@ namespace MVC03.BusinessLogic.Services.Classes
         {
             return _employeeRepository.Update(_mapper.Map<UpdatedEmployeeDto, Employee>(employeeDto));
         }
-
         public bool DeleteEmployee(int id)
         {
             throw new NotImplementedException();
         }
-
-
     }
 }
