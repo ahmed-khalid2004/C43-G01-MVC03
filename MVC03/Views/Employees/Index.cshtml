@@ -8,6 +8,20 @@
 <br />
 <a class="btn btn-primary" asp-controller="Employees" asp-action="Create">Create Employee</a>
 <br />
+
+<div class="m-2">
+    <form asp-action="index" class="row offset-2" method="get">
+        <div class="col-8">
+            <input class="form-control" type="text" name="EmployeeSearchName" placeholder="Search Employee By Name" />
+        </div>
+        <div class="col-4">
+            <input type="submit" class="btn btn-outline-success" value="Search" />
+
+        </div>
+    </form>
+
+</div>
+
 @if (Model.Any())
 {
     <table class="table table-striped table-hover mt-3">
@@ -17,6 +31,7 @@
                 <th>@Html.DisplayNameFor(e => e.Email)</th>
                 <th>@Html.DisplayNameFor(e => e.EmpType)</th>
                 <th>@Html.DisplayNameFor(e => e.Age)</th>
+                <th>@Html.DisplayNameFor(e => e.Department)</th>
                 <th>@Html.DisplayNameFor(e => e.Salary)</th>
                 <th>@Html.DisplayNameFor(e => e.IsActive)</th>
                 <th>@Html.DisplayNameFor(e => e.EmpGender)</th>
@@ -32,8 +47,9 @@
 
                     <td>@employee.Name</td>
                     <td>@employee.Email</td>
-                    <td>@employee.EmpType</td>
+                    <td>@employee.EmpType</td> 
                     <td>@employee.Age</td>
+                    <td>@(string.IsNullOrEmpty(employee.Department) ? "No Department" : employee.Department) </td>
                     <td>@Html.DisplayFor(E => employee.Salary)</td>
                     <td>
                         <i class="fa @(employee.IsActive ? "fa-solid fa-circle-check text-success" : "fa-times-circle text-danger")"></i>
