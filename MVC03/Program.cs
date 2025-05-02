@@ -1,16 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using MVC03.DataAccess.Repositories.Classes;
-using MVC03.BusinessLogic.Services;
 using MVC03.BusinessLogic.Services.Classes;
 using MVC03.BusinessLogic.Services.Interfaces;
 using MVC03.DataAccess.Data.Contexts;
-using MVC03.DataAccess.Repositories;
-using MVC03.DataAccess.Repositories.Classes;
 using MVC03.DataAccess.Repositories.Interfaces;
-using MVC03.DataAccess.Repositories.Classes;
 using Microsoft.AspNetCore.Mvc;
-using MVC03.DataAccess.Repositories.Classes;
 using MVC03.BusinessLogic.Profile;
 namespace MVC03
 {
@@ -29,14 +23,16 @@ namespace MVC03
             //builder.Services.AddScoped<ApplicationDbContext>();
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlServer(builder.Configuration["DefaultConnection"]);
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                options.UseLazyLoadingProxies();
             });
 
-            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            //builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             builder.Services.AddScoped<IDepartmentService, DepartmentService>();
-            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            //builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddAutoMapper(M => M.AddProfile(new MappingProfile()));
             #endregion
 

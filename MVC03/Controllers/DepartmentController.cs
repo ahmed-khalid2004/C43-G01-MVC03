@@ -1,6 +1,7 @@
 using BusinessLogic.DataTransferObjects.DepartmentDtos;
 using Microsoft.AspNetCore.Mvc;
 using MVC03.BusinessLogic.DataTransferObjects;
+using MVC03.BusinessLogic.DataTransferObjects.DepartmentDtos;
 using MVC03.BusinessLogic.Services;
 using MVC03.BusinessLogic.Services.Interfaces;
 using MVC03.ViewModels.DepartmentViewModel;
@@ -8,34 +9,47 @@ using MVC03.ViewModels.DepartmentViewModel;
 namespace MVC03.Controllers
 {
     public class DepartmentController(IDepartmentService _departmentService,
-         ILogger<DepartmentController> _logger,
-         IWebHostEnvironment _environment) : Controller
+      ILogger<DepartmentController> _logger,
+      IWebHostEnvironment _environment) : Controller
     {
         [HttpGet]
         public IActionResult Index()
         {
+            ViewData["Message"] = new DepartmentDto() { Name = "TestViewData" };
+            ViewBag.Message = new DepartmentDto() { Name = "TestViewData" };
             var departments = _departmentService.GetAllDepartments();
             return View(departments);
         }
+
         #region Create Department
+
         [HttpGet]
         public IActionResult Create() => View();
+
         [HttpPost]
-        public IActionResult Create(CreatedDepartmentDto departmentDto)
+        //[ValidateAntiForgeryToken]
+        public IActionResult Create(DepartmentViewModel departmentViewModel)
         {
             if (ModelState.IsValid) // Server Side Validation
             {
                 try
                 {
-                    int result = _departmentService.AddDepartment(departmentDto);
+                    var departmentDto = new CreatedDepartmentDto()
+                    {
+                        Name = departmentViewModel.Name,
+                        Code = departmentViewModel.Code,
+                        DateOfCreation = departmentViewModel.DateOfCreation,
+                        Description = departmentViewModel.Description
+                    };
+                    int result = _departmentService.CreateDepartment(departmentDto);
+                    string Message;
                     if (result > 0)
-                    {
-                        return RedirectToAction(nameof(Index));
-                    }
+                        Message = $"Department = {departmentViewModel.Name} is created Succesfully";
                     else
-                    {
-                        ModelState.AddModelError(string.Empty, "Department Can't Be Created");
-                    }
+                        Message = $"Department = {departmentViewModel.Name} can not be created";
+
+                    TempData["Message"] = Message;
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (Exception ex)
                 {
@@ -52,9 +66,12 @@ namespace MVC03.Controllers
                 }
             }
 
-            return View(departmentDto);
+            return View(departmentViewModel);
         }
+
+
         #endregion
+
         #region Department Details
         [HttpGet]
         public IActionResult Details(int? id)
@@ -73,7 +90,7 @@ namespace MVC03.Controllers
             if (!id.HasValue) return BadRequest();
             var department = _departmentService.GetDepartmentById(id.Value);
             if (department is null) return NotFound();
-            var departmentViewModel = new DepartmentEditViewModel()
+            var departmentViewModel = new DepartmentViewModel()
             {
                 Code = department.Code,
                 Name = department.Name,
@@ -84,7 +101,7 @@ namespace MVC03.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit([FromRoute] int id, DepartmentEditViewModel viewModel)
+        public IActionResult Edit([FromRoute] int id, DepartmentViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -168,9 +185,11 @@ namespace MVC03.Controllers
                     _logger.LogError(ex.Message);
                     return View("ErrorView", ex);
                 }
-                //return View();
+
             }
         }
+
+
         #endregion
     }
 }

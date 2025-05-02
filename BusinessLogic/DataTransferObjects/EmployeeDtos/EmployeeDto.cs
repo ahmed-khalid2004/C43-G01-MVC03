@@ -28,6 +28,6 @@ namespace MVC03.BusinessLogic.DataTransferObjects.EmployeeDtos
 
         [Display(Name = "Employee Type")]
         public string EmpType { get; set; }
-
+        public string? Department { get; set; }
     }
 }

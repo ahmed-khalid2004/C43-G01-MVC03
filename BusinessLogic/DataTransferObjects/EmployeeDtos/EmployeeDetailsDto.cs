@@ -37,6 +37,8 @@ namespace MVC03.BusinessLogic.DataTransferObjects.EmployeeDtos
         public int LastModifiedBy { get; set; }
 
         public DateTime LastModifiedOn { get; set; }
+        public int? DepartmentId { get; set; }
+        public string? Department { get; set; }
 
     }
 }
