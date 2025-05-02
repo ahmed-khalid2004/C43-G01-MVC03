@@ -1,18 +1,11 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using MVC03.DataAccess.Repositories.Classes;
-using MVC03.BusinessLogic.Services;
 using MVC03.BusinessLogic.Services.Classes;
 using MVC03.BusinessLogic.Services.Interfaces;
 using MVC03.DataAccess.Data.Contexts;
-using MVC03.DataAccess.Repositories;
-using MVC03.DataAccess.Repositories.Classes;
 using MVC03.DataAccess.Repositories.Interfaces;
-using MVC03.DataAccess.Repositories.Classes;
 using Microsoft.AspNetCore.Mvc;
-using MVC03.DataAccess.Repositories.Classes;
 using MVC03.BusinessLogic.Profile;
-using MVC_Project.DataAccess.Repositories.Classes;
 namespace MVC03
 {
     public class Program
@@ -34,9 +27,9 @@ namespace MVC03
                 options.UseLazyLoadingProxies();
             });
 
-            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            //builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             builder.Services.AddScoped<IDepartmentService, DepartmentService>();
-            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            //builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();

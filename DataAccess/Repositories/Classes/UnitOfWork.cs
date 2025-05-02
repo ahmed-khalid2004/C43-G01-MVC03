@@ -7,7 +7,7 @@ using MVC03.DataAccess.Data.Contexts;
 using MVC03.DataAccess.Repositories.Classes;
 using MVC03.DataAccess.Repositories.Interfaces;
 
-namespace MVC_Project.DataAccess.Repositories.Classes
+namespace MVC03.DataAccess.Repositories.Classes
 {
     public class UnitOfWork : IUnitOfWork
     {
