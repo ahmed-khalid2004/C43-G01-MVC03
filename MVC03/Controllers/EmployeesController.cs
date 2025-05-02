@@ -10,7 +10,7 @@ namespace MVC03.Controllers
     public class EmployeesController(IEmployeeService _employeeService,
          IWebHostEnvironment environment,
          ILogger<EmployeesController> logger,
-         IDepartmentService departmentService) : Controller
+         IDepartmentService departmentService) : Controller        
     {
         public IActionResult Index()
         {
