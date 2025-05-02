@@ -1,4 +1,5 @@
-﻿@model EmployeeViewModel
+﻿@using MVC03.BusinessLogic.Services.Interfaces
+@model EmployeeViewModel
 @inject IDepartmentService departmentService
 @{
     var Departments = new SelectList(departmentService.GetAllDepartments(), "Id", nameof(DepartmentDto.Name));

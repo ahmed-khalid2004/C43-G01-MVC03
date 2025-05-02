@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MVC03.DataAccess.Models.Shared.Enums;
 using MVC03.DataAccess.Models.Shared;
+using MVC03.DataAccess.Models.DepartmentModel;
 
 namespace MVC03.DataAccess.Models.EmployeeModel
 {
@@ -20,6 +21,8 @@ namespace MVC03.DataAccess.Models.EmployeeModel
         public DateTime HiringDate { get; set; }
         public Gender Gender { get; set; }
         public EmployeeType EmployeeType { get; set; }
+        public int? DepartmentId { get; set; }
+        public Department? Department { get; set; }
     }
 
 }

@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.DataTransferObjects.DepartmentDtos;
+using MVC03.BusinessLogic.DataTransferObjects.DepartmentDtos;
 
 namespace MVC03.BusinessLogic.Services.Interfaces
 {
